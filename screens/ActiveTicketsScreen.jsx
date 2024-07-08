@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
-import CustomSafeArea from "../components/CustomSafeArea";
 import TicketCard from "../components/TicketCard";
 import { dummyTickets } from "../data/dummyData";
 
@@ -19,16 +18,24 @@ const groupTicketsByType = (tickets) => {
 };
 
 const ActiveTicketsScreen = () => {
-  // const tickets = useSelector((state) =>
-  //   state?.tickets?.filter((ticket) => ticket?.status === "active")
-  // );
+  const [activeTicketId, setActiveTicketId] = useState(null);
+
   const groupedTickets = groupTicketsByType(dummyTickets);
+
+  const handleToggleTicket = (id) => {
+    setActiveTicketId((prevId) => (prevId === id ? null : id));
+  };
+
+  const handleResolveTicket = (id) => {
+    console.log(`Tiket ${id} rijesen.`);
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Aktivni Tiketi</Text>
       <FlatList
         data={groupedTickets}
+        showsVerticalScrollIndicator={false}
         keyExtractor={(item) => item.type}
         renderItem={({ item }) => (
           <View>
@@ -38,15 +45,15 @@ const ActiveTicketsScreen = () => {
             {item.tickets.map((ticket) => (
               <TicketCard
                 key={ticket.id}
-                type={ticket.type}
-                computerId={ticket.computerId}
-                issue={ticket.issue}
-                serialNumber={ticket.serialNumber}
-                reportedBy={ticket.reportedBy}
+                ticket={ticket}
+                isActive={ticket.id === activeTicketId}
+                onToggle={() => handleToggleTicket(ticket.id)}
+                onResolve={() => handleResolveTicket(ticket.id)}
               />
             ))}
           </View>
         )}
+        contentContainerStyle={{ paddingBottom: 90 }}
       />
     </View>
   );

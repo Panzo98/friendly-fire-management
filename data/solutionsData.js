@@ -1,0 +1,42 @@
+export const solutionsData = {
+  mouse: [
+    { label: "Ne radi scroll", value: "ne_radi_scroll" },
+    { label: "Ne radi lijevi klik", value: "ne_radi_lijevi_klik" },
+    { label: "Ne radi desni klik", value: "ne_radi_desni_klik" },
+    { label: "Ne radi senzor pokreta", value: "ne_radi_senzor_pokreta" },
+    { label: "Gubi kontakt na kablu", value: "gubi_kontakt_na_kablu" },
+    { label: "Ostalo", value: "ostalo" },
+  ],
+  headphones: [
+    { label: "Ne radi lijeva slušalica", value: "ne_radi_lijeva_slušalica" },
+    { label: "Ne radi desna slušalica", value: "ne_radi_desna_slušalica" },
+    { label: "Ne radi mikrofon", value: "ne_radi_mikrofon" },
+    { label: "Tihe slušalice", value: "tihe_slušalice" },
+    { label: "Tih mikrofon", value: "tih_mikrofon" },
+    { label: "Ostalo", value: "ostalo" },
+  ],
+  keyboard: [
+    { label: "Ne radi space bar", value: "ne_radi_space_bar" },
+    { label: "Ne rade tasteri A i S", value: "ne_rade_tasteri_A_i_S" },
+    { label: "Ne radi backspace", value: "ne_radi_backspace" },
+    { label: "Ne radi enter", value: "ne_radi_enter" },
+    { label: "Gubi kontakt na kablu", value: "gubi_kontakt_na_kablu" },
+    { label: "Ostalo", value: "ostalo" },
+  ],
+  computer: [
+    { label: "Neće da se uključi", value: "neće_da_se_uključi" },
+    { label: "Spor rad", value: "spor_rad" },
+    { label: "Ne radi USB port", value: "ne_radi_USB_port" },
+    { label: "Plavi ekran", value: "plavi_ekran" },
+    { label: "Pregrijava se", value: "pregrijava_se" },
+    { label: "Ostalo", value: "ostalo" },
+  ],
+  monitor: [
+    { label: "Ne radi", value: "ne_radi" },
+    { label: "Ne pokazuje sliku", value: "ne_pokazuje_sliku" },
+    { label: "Crni ekran", value: "crni_ekran" },
+    { label: "Slaba rezolucija", value: "slaba_rezolucija" },
+    { label: "Linije na ekranu", value: "linije_na_ekranu" },
+    { label: "Ostalo", value: "ostalo" },
+  ],
+};
