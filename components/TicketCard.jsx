@@ -18,7 +18,6 @@ const TicketCard = ({ ticket, isActive, onToggle, onResolve }) => {
   const [comment, setComment] = useState("");
 
   const solutions = solutionsData;
-  console.log(solutions);
 
   let iconName;
   let iconColor = "#e52936";
