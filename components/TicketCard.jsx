@@ -59,17 +59,45 @@ const TicketCard = ({ ticket, isActive, onToggle, onResolve }) => {
     <View style={styles.card}>
       <TouchableOpacity onPress={handleToggle} style={styles.cardHeader}>
         <MaterialCommunityIcons name={iconName} size={24} color={iconColor} />
-        <Text
-          style={styles.cardTitle}
-        >{`${ticket.type} - ${ticket.computerId}`}</Text>
+        <Text style={styles.cardTitle}>{`${ticket.serialNumber}`}</Text>
       </TouchableOpacity>
       {isActive && (
         <View style={styles.cardContent}>
           <Text style={styles.cardText}>{ticket.issue}</Text>
-          <Text style={styles.cardText}>
-            Serijski broj: {ticket.serialNumber}
-          </Text>
+          <Text style={styles.cardText}>Računar: {ticket.computerId}</Text>
           <Text style={styles.cardText}>Prijavio: {ticket.reportedBy}</Text>
+          <Text style={styles.cardText}>Vrijeme: {ticket.time}</Text>
+          <Text style={styles.cardText}>Datum: {ticket.date}</Text>
+
+          {ticket.additionalComment ? (
+            <Text style={styles.cardText}>
+              Dodatni komentar: {ticket.additionalComment}
+            </Text>
+          ) : null}
+
+          {ticket.userWhoAttempted ? (
+            <Text style={styles.cardText}>
+              Pokušao rešiti: {ticket.userWhoAttempted}
+            </Text>
+          ) : null}
+
+          {ticket.attemptedSolution ? (
+            <Text style={styles.cardText}>
+              Pokušano rešenje: {ticket.attemptedSolution}
+            </Text>
+          ) : null}
+
+          {ticket.comments && ticket.comments.length > 0 ? (
+            <>
+              <Text style={styles.cardText}>Komentari:</Text>
+              {ticket.comments.map((comment, index) => (
+                <Text key={index} style={styles.cardText}>
+                  - {comment.user}: {comment.comment}
+                </Text>
+              ))}
+            </>
+          ) : null}
+
           <TouchableOpacity
             style={styles.resolveButton}
             onPress={() => setModalVisible(true)}
@@ -89,13 +117,7 @@ const TicketCard = ({ ticket, isActive, onToggle, onResolve }) => {
             <Text style={styles.modalTitle}>Rešenje problema</Text>
             <RNPickerSelect
               onValueChange={(value) => setSelectedSolution(value)}
-              items={solutions[ticket?.type] || []}
-              // placeholder={{
-              //   label: "Izaberite rešenje",
-              //   value: null,
-              //   color: "#75767c",
-              //   disabled: true,
-              // }}
+              items={solutions[ticket.type] || []}
               style={pickerSelectStyles}
             />
             {selectedSolution === "ostalo" && (
