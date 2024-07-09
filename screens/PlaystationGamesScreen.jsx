@@ -236,7 +236,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
-    // backgroundColor: "#e52936",
   },
   addButtonText: {
     color: "#e52936",

@@ -9,6 +9,8 @@ import {
 } from "react-native";
 import CustomSafeArea from "./CustomSafeArea";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import CustomTextInput from "./CustomTextInput";
+import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
 
 const CreateEditGameModal = ({
   isVisible,
@@ -84,43 +86,65 @@ const CreateEditGameModal = ({
             </TouchableOpacity>
           )}
         </View>
-        <Text style={styles.modalSubtitle}>Naziv</Text>
+        {/* <Text style={styles.modalSubtitle}>Naziv</Text>
         <TextInput
           style={styles.input}
           value={gameTitle}
           onChangeText={setGameTitle}
+        /> */}
+        <CustomTextInput
+          label="Naziv"
+          text={gameTitle}
+          setText={setGameTitle}
         />
-        <Text style={styles.modalSubtitle}>Igrača</Text>
-        <TextInput
-          style={styles.input}
-          value={gamePlayers}
-          onChangeText={setGamePlayers}
+        <CustomTextInput
+          label="Igrača"
+          text={gamePlayers}
+          setText={setGamePlayers}
         />
-        <Text style={styles.modalSubtitle}>Veličina</Text>
-        <TextInput
-          style={styles.input}
-          value={gameSize}
-          onChangeText={setGameSize}
+        <CustomTextInput
+          label="Veličina"
+          text={gameSize}
+          setText={setGameSize}
         />
-        <Text style={styles.modalSubtitle}>URL Slike</Text>
-        <TextInput
-          style={styles.input}
-          value={gameImage}
-          onChangeText={setGameImage}
+        <CustomTextInput
+          label="URL Slike"
+          text={gameImage}
+          setText={setGameImage}
         />
+
         <Text style={styles.modalSubtitle}>Izaberi PS5</Text>
-        {[1, 2, 3, 4].map((ps5Id) => (
-          <TouchableOpacity
-            key={ps5Id}
-            style={[
-              styles.ps5Option,
-              selectedPS5State.includes(ps5Id) && styles.selectedPs5Option,
-            ]}
-            onPress={() => togglePS5Selection(ps5Id)}
-          >
-            <Text style={styles.ps5Text}>PS-{ps5Id}</Text>
-          </TouchableOpacity>
-        ))}
+        <View style={styles.pscontainer}>
+          {[1, 2, 3, 4].map((ps5Id) => (
+            <TouchableOpacity
+              key={ps5Id}
+              style={[
+                styles.ps5Option,
+                selectedPS5State.includes(ps5Id) && styles.selectedPs5Option,
+              ]}
+              onPress={() => togglePS5Selection(ps5Id)}
+            >
+              <Text
+                style={[
+                  styles.ps5Text,
+                  {
+                    color: selectedPS5State.includes(ps5Id)
+                      ? "#FFFFFF"
+                      : "#121212",
+                  },
+                ]}
+              >
+                PS {ps5Id}
+              </Text>
+              <Icon1
+                name="sony-playstation"
+                size={50}
+                color={selectedPS5State.includes(ps5Id) ? "#FFFFFF" : "#121212"}
+                style={styles.ps5Icon}
+              />
+            </TouchableOpacity>
+          ))}
+        </View>
         <View style={styles.modalButtons}>
           <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
             <Text style={styles.saveButtonText}>Sačuvaj</Text>
@@ -194,18 +218,30 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 10,
   },
+  pscontainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+  },
   ps5Option: {
     backgroundColor: "#202427",
-    padding: 10,
+    padding: 20,
     borderRadius: 5,
     marginBottom: 10,
+    width: "48%", // Da biste imali dva kvadrata u redu
+    alignItems: "center",
   },
   selectedPs5Option: {
     backgroundColor: "#e52936",
   },
   ps5Text: {
     color: "#FFFFFF",
-    fontSize: 16,
+    fontSize: 18,
+    marginBottom: 10,
+    fontWeight: "bold",
+  },
+  ps5Icon: {
+    alignSelf: "center",
   },
   modalButtons: {
     flexDirection: "row",

@@ -5,17 +5,18 @@ import {
   StyleSheet,
   TouchableOpacity,
   Modal,
-  TextInput,
   LayoutAnimation,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { solutionsData } from "../data/solutionsData";
 import RNPickerSelect from "react-native-picker-select";
+import { TextInput } from "react-native-paper";
 
 const TicketCard = ({ ticket, isActive, onToggle, onResolve }) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedSolution, setSelectedSolution] = useState("");
   const [comment, setComment] = useState("");
+  const [isFocused, setIsFocused] = React.useState(false);
 
   const solutions = solutionsData;
 
@@ -121,11 +122,31 @@ const TicketCard = ({ ticket, isActive, onToggle, onResolve }) => {
             />
             {selectedSolution === "ostalo" && (
               <TextInput
-                style={styles.commentInput}
-                placeholder="Unesite komentar"
-                placeholderTextColor="#999"
+                label={"Komentar"}
                 value={comment}
-                onChangeText={setComment}
+                onChangeText={(text) => setComment(text)}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+                outlineColor="#202427"
+                activeOutlineColor="#e52936"
+                multiline
+                textColor="white"
+                mode="outlined"
+                theme={{
+                  colors: {
+                    onSurfaceVariant: comment ? "#e52936" : "#a9a9a9a9",
+                    color: "white",
+                  },
+                  fonts: {
+                    labelMedium: {
+                      fontWeight: "bold",
+                    },
+                    label: {
+                      fontWeight: "bold",
+                    },
+                  },
+                }}
+                style={styles.input}
               />
             )}
             <TouchableOpacity
@@ -231,6 +252,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     marginTop: 10,
     width: "100%",
+  },
+  input: {
+    width: "100%",
+    backgroundColor: "#121212",
+    color: "#FFFFFF",
+    borderRadius: 5,
+    marginBottom: 10,
   },
 });
 

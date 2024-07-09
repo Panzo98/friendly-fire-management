@@ -2,7 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ActiveTicketsScreen from "../screens/ActiveTicketsScreen";
 import SettingsScreen from "../screens/SettingsScreen";
-// import CreateNewTicketScreen from "../screens/CreateNewTicketScreen"; // Add this import for the new screen
+import CreateTicketScreen from "../screens/CreateTicketScreen"; // Add this import for the new screen
 import PlaystationGamesScreen from "../screens/PlaystationGamesScreen"; // Add this import for PlayStation games screen
 // import InventoryScreen from "../screens/InventoryScreen"; // Add this import for Inventory screen
 // import HistoryScreen from "../screens/HistoryScreen"; // Add this import for History screen
@@ -62,7 +62,7 @@ const MainNavigator = () => {
     >
       <Tab.Screen name="Aktivni Tiketi" component={ActiveTicketsScreen} />
       <Tab.Screen name="PlayStation Igre" component={PlaystationGamesScreen} />
-      <Tab.Screen name="Kreiraj Tiket" component={SettingsScreen} />
+      <Tab.Screen name="Kreiraj Tiket" component={CreateTicketScreen} />
       {/* <Tab.Screen name="Inventar" component={SettingsScreen} /> */}
       {/* <Tab.Screen name="Istorija" component={SettingsScreen} /> */}
       <Tab.Screen name="Podesavanja" component={SettingsScreen} />
