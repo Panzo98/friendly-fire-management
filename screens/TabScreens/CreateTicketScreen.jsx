@@ -6,9 +6,9 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import CustomSafeArea from "../components/CustomSafeArea";
-import CustomTextInput from "../components/CustomTextInput";
-import EquipmentSelector from "../components/EquipmentSelector";
+import CustomSafeArea from "../../components/CustomSafeArea";
+import CustomTextInput from "../../components/CustomTextInput";
+import EquipmentSelector from "../../components/EquipmentSelector";
 
 const CreateTicketScreen = () => {
   const [type, setType] = useState("mouse");
@@ -42,9 +42,7 @@ const CreateTicketScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <CustomSafeArea />
-      <Text style={styles.header}>Kreiraj novi tiket</Text>
+    <>
       <EquipmentSelector type={type} setType={setType} />
       <CustomTextInput
         label={"Opis problema"}
@@ -79,7 +77,7 @@ const CreateTicketScreen = () => {
       >
         <Text style={styles.createButtonText}>Kreiraj tiket</Text>
       </TouchableOpacity>
-    </View>
+    </>
   );
 };
 

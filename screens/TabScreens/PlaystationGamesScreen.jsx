@@ -8,9 +8,9 @@ import {
   Modal,
   TextInput,
 } from "react-native";
-import { gamesData } from "../data/gamesData";
-import GameCard from "../components/GameCard";
-import CreateEditGameModal from "../components/CreateEditGameModal"; // Importuj novu komponentu
+import { gamesData } from "../../data/gamesData";
+import GameCard from "../../components/GameCard";
+import CreateEditGameModal from "../../components/CreateEditGameModal";
 
 const PlaystationGamesScreen = () => {
   const [games, setGames] = useState(gamesData);
@@ -64,8 +64,7 @@ const PlaystationGamesScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>PlayStation Igrice</Text>
+    <>
       <View style={styles.sortButtonsContainer}>
         <TouchableOpacity
           style={[
@@ -96,7 +95,7 @@ const PlaystationGamesScreen = () => {
         onSave={handleSaveChanges}
         onDelete={handleDeleteGame}
       />
-    </View>
+    </>
   );
 };
 

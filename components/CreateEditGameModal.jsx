@@ -11,6 +11,7 @@ import CustomSafeArea from "./CustomSafeArea";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import CustomTextInput from "./CustomTextInput";
 import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
+import { LinearGradient } from "expo-linear-gradient";
 
 const CreateEditGameModal = ({
   isVisible,
@@ -86,12 +87,6 @@ const CreateEditGameModal = ({
             </TouchableOpacity>
           )}
         </View>
-        {/* <Text style={styles.modalSubtitle}>Naziv</Text>
-        <TextInput
-          style={styles.input}
-          value={gameTitle}
-          onChangeText={setGameTitle}
-        /> */}
         <CustomTextInput
           label="Naziv"
           text={gameTitle}
@@ -118,30 +113,40 @@ const CreateEditGameModal = ({
           {[1, 2, 3, 4].map((ps5Id) => (
             <TouchableOpacity
               key={ps5Id}
-              style={[
-                styles.ps5Option,
-                selectedPS5State.includes(ps5Id) && styles.selectedPs5Option,
-              ]}
+              style={styles.ps5Option}
               onPress={() => togglePS5Selection(ps5Id)}
             >
-              <Text
-                style={[
-                  styles.ps5Text,
-                  {
-                    color: selectedPS5State.includes(ps5Id)
-                      ? "#FFFFFF"
-                      : "#121212",
-                  },
-                ]}
+              <LinearGradient
+                colors={
+                  selectedPS5State.includes(ps5Id)
+                    ? ["#57222A", "#4A242A", "#242427"]
+                    : ["#202427", "#303437", "#404447"]
+                }
+                start={[0, 0]}
+                end={[1, 1]}
+                style={styles.gradient}
               >
-                PS {ps5Id}
-              </Text>
-              <Icon1
-                name="sony-playstation"
-                size={50}
-                color={selectedPS5State.includes(ps5Id) ? "#FFFFFF" : "#121212"}
-                style={styles.ps5Icon}
-              />
+                <Text
+                  style={[
+                    styles.ps5Text,
+                    {
+                      color: selectedPS5State.includes(ps5Id)
+                        ? "#FFFFFF"
+                        : "#121212",
+                    },
+                  ]}
+                >
+                  PS {ps5Id}
+                </Text>
+                <Icon1
+                  name="sony-playstation"
+                  size={50}
+                  color={
+                    selectedPS5State.includes(ps5Id) ? "#FFFFFF" : "#121212"
+                  }
+                  style={styles.ps5Icon}
+                />
+              </LinearGradient>
             </TouchableOpacity>
           ))}
         </View>
@@ -224,15 +229,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   ps5Option: {
-    backgroundColor: "#202427",
-    padding: 20,
-    borderRadius: 5,
+    width: "48%",
+    borderRadius: 15,
     marginBottom: 10,
-    width: "48%", // Da biste imali dva kvadrata u redu
-    alignItems: "center",
   },
-  selectedPs5Option: {
-    backgroundColor: "#e52936",
+  gradient: {
+    padding: 20,
+    borderRadius: 15,
+    alignItems: "center",
   },
   ps5Text: {
     color: "#FFFFFF",

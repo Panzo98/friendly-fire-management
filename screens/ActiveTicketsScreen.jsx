@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
-import { useSelector } from "react-redux";
 import TicketCard from "../components/TicketCard";
 import { dummyTickets } from "../data/dummyData";
+import { useRoute } from "@react-navigation/native";
 
 const groupTicketsByType = (tickets) => {
   const grouped = tickets.reduce((acc, ticket) => {
@@ -18,9 +18,16 @@ const groupTicketsByType = (tickets) => {
 };
 
 const ActiveTicketsScreen = () => {
+  const route = useRoute();
+  const { type } = route.params || {};
   const [activeTicketId, setActiveTicketId] = useState(null);
+  console.log(type);
 
-  const groupedTickets = groupTicketsByType(dummyTickets);
+  const filteredTickets = type
+    ? dummyTickets.filter((ticket) => ticket.type === type)
+    : dummyTickets;
+
+  const groupedTickets = groupTicketsByType(filteredTickets);
 
   const handleToggleTicket = (id) => {
     setActiveTicketId((prevId) => (prevId === id ? null : id));
@@ -31,8 +38,7 @@ const ActiveTicketsScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Aktivni Tiketi</Text>
+    <>
       <FlatList
         data={groupedTickets}
         showsVerticalScrollIndicator={false}
@@ -55,7 +61,7 @@ const ActiveTicketsScreen = () => {
         )}
         contentContainerStyle={{ paddingBottom: 90 }}
       />
-    </View>
+    </>
   );
 };
 
